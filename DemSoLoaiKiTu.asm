@@ -18,7 +18,7 @@
         ;nhap xau
         lea si,xau
         mov cx,0
-        mov bL,0
+        mov bx,0
         nhap:
             mov ah,1
             int 21h
@@ -27,10 +27,11 @@
             mov [si],al
             inc si
             inc cx
-            inc bl
+            inc bx
             jmp nhap
         
         ;hien xau 
+        
         thongbao:
             lea dx,st2
             mov ah,9
@@ -40,8 +41,8 @@
             lea si,xau
             ;doc xau
             docxau:
-                mov bl,[si]
-                mov tg,bl
+                mov al,[si]
+                mov tg,al
                 mov dl,[si]
                 mov ah,2
                 int 21h
@@ -50,7 +51,8 @@
         ;hien so ki tu
         lea dx,st3
         mov ah,9
-        int 21h
+        int 21h 
+        mov cx,bx
         mov bl,0 
         
         lea si,xau
@@ -59,13 +61,15 @@
         mov al,[si]
         cmp tg,al
         je cong
-        inc si
         loop  dem
         cong:   
             inc bl
-        loop dem
+            cmp cx,0
+            je hien
+        jmp dem
         
-        ;hien
+        ;hien 
+        hien:
         mov dl,bl
         add dl,30h
         mov ah,2
