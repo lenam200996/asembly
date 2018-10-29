@@ -21,55 +21,71 @@
             mov ah,1
             int 21h
             cmp al,13
-            je hienxauhoa
+            je hienxauthuong
             mov [si],al
             inc si
             inc cx
             jmp nhap
         
-        
-        ;hien xau hoa 
-        hienxauhoa:
-            lea dx,st2
-            mov ah,9
-            int 21h
-            
-            mov bx,cx
-            lea si,xau
-            ;doc xau
-            docxauhoa:
-                mov al,[si]
-                cmp al,97
-                jb hien1
-                sub al,20h
-                hien1:
-                    mov dl,al
-                    mov ah,2
-                    int 21h
-                    inc si
-                    loop docxauhoa
-        
-        ;hien xau thuong
          
         hienxauthuong:
             lea dx,st3
             mov ah,9
             int 21h
             
-            mov cx,bx
+            mov bx,cx
             lea si,xau
             ;doc xau
             docxauthuong:
                 mov al,[si]
-                cmp al,97
-                jae hien2
-                add al,20h
-                hien2:
+                
+                hien2:  
+                
                     mov dl,al
                     mov ah,2
                     int 21h
                     inc si
-                    loop docxauthuong
+                    loop docxauthuong  
+                    
+        ;hien xau hoa 
+        hienxauhoa:
+            lea dx,st2
+            mov ah,9
+            int 21h
+            
+            mov cx,bx
+            lea si,xau 
+            
+            ;doc xau
+            docxauhoa:
+                mov al,[si]
+                ;----------------
+
+                cmp al,123
+                jae hien1
+                cmp al,96
+                jbe cov1
+                 ;-------
+                
+                sub al,20h
+                hien1:
+                    cmp cx,0
+                    je ra
+                    mov dl,al
+                    mov ah,2
+                    int 21h
+                    inc si
+                    loop docxauhoa
+                         
+                         
+               cov1:
+                cmp al,91
+                jae hien1
+                cmp al,64
+                jbe hien1
+                   
+        
+        
         ra:
             mov ah,76
             int 21h
