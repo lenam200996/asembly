@@ -16,8 +16,9 @@
         
         ;nhap xau
         lea si,xau
-        mov cx,0
-        mov bx,0
+        mov cl,0
+        mov bl,0
+        mov bh,0
         nhap:
             mov ah,1
             int 21h
@@ -25,12 +26,18 @@
             je hien
             mov [si],al
             inc si
-            inc cx
-            inc bx
+            inc cl
+            cmp bl,9
+            je convert
+            inc bl
             jmp nhap
         
         ;hien xau 
-       
+                 
+        convert:
+        mov bl,0
+        inc bh
+        jmp nhap
         ;hien so ki tu 
         hien:
         lea dx,st3
@@ -38,6 +45,10 @@
         int 21h
         
         ;hien
+        mov dl,bh
+        add dl,30h
+        mov ah,2
+        int 21h
         mov dl,bl
         add dl,30h
         mov ah,2
