@@ -16,7 +16,7 @@
         
         ;nhap xau
         lea si,xau
-        mov cl,0
+        ;mov cl,0
         mov bl,0
         mov bh,0
         nhap:
@@ -26,7 +26,7 @@
             je hien
             mov [si],al
             inc si
-            inc cl
+            ;inc cl
             cmp bl,9
             je convert
             inc bl
