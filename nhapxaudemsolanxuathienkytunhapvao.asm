@@ -4,7 +4,7 @@
     tb1 db 13,10,'nhap xau: $'
     tb2 db 13,10,'nhap ky tu can dem: $'
     tb3 db 13,10,'so lan xuat hien: $'
-    xau db 100 dup('')
+    xau db 100 dup(?)
 .code
     main proc
        mov ax,@data
