@@ -3,7 +3,7 @@
 .stack 100h
 .data
     tb db 'tong = $'
-    mang dw 12,8,7,5,2,9,9,100
+    mang dw 12,8,7,5,2,9,9,900
     tong dw 0
     
 .code 
@@ -22,23 +22,27 @@
        ; mov dl,2
         tinh:
             ;-- so a
-            mov dl,3
+            mov bx,3
             ;----- 
             mov ax,0
+            mov dx,0
             mov ax,[si]
-            mov bx,ax
-            add si,2
-            div dl
-            cmp ah,0
+           ; mov bx,ax
+            
+            div bx
+            cmp dx,0
             je tinhtong
+            add si,2
             loop tinh
         tinhtong:
             cmp cx,0
             je hien
+            mov bx,[si]
             mov dx,0
             mov dx,tong
             add bx,dx
             mov tong ,bx
+            add si,2
             loop tinh
         hien:
             mov bx,tong
